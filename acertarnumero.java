@@ -10,7 +10,7 @@ public class BuscarNumero {
 
 		aleatorio=numeroAleatorio();
 		System.out.println("Acierta el numero entre 1 y 100");
-		System.out.println("Introduce un numero");
+		
 
 		do{
 			numusu=insertarNumero();
@@ -26,17 +26,28 @@ public class BuscarNumero {
 
 	public static int numeroAleatorio(){
 		int num;
-		num= (int)((1000-1)*Math.random() + 1);
+		num= (int)((100-1)*Math.random() + 1);
 		return num;
 	}
 	public static int insertarNumero(){
 		Scanner sc=new Scanner(System.in);
+		boolean error;
 		int numale=0;
-		try{
-			numale=sc.nextInt();
-		}catch(InputMismatchException e){
-			System.out.println("Introduce solo numeros, no letras");
-		}
+		do{
+			error=false;
+			System.out.println("Introduce un numero");
+
+			try{
+				numale=sc.nextInt();
+			}catch(InputMismatchException e){
+				System.out.println("Introduce solo numeros");
+				error=true;
+			}
+			if(numale>100 || numale<0){
+				System.out.println("El rango de numeros es entre el 1 y el 100");
+			}
+			sc.nextLine();
+		}while(numale<1 || numale>100 || error==true);
 		return numale;
 	}
 
